@@ -41,4 +41,3 @@ defmodule Ch25BackendWeb.QuestionController do
     end
   end
 end
-  

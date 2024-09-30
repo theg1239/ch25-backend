@@ -1,9 +1,8 @@
+# lib/ch25_backend/auth/firebase.ex
 defmodule Ch25Backend.Auth.Firebase do
   @moduledoc """
   Firebase Authentication handler.
   """
-
-  alias JOSE.JWT
 
   @firebase_project_id "cryptichunt25"
 

@@ -1,11 +1,13 @@
 defmodule Ch25BackendWeb.LeaderboardChannelTest do
   use Ch25BackendWeb.ChannelCase
 
+  alias Ch25BackendWeb.LeaderboardChannel
+
   setup do
     {:ok, _, socket} =
       Ch25BackendWeb.UserSocket
       |> socket("user_id", %{some: :assign})
-      |> subscribe_and_join(Ch25BackendWeb.LeaderboardChannel, "leaderboard:lobby")
+      |> subscribe_and_join(LeaderboardChannel, "leaderboard:lobby")
 
     %{socket: socket}
   end

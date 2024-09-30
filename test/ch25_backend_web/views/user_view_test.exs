@@ -3,7 +3,13 @@ defmodule Ch25BackendWeb.UserViewTest do
   alias Ch25BackendWeb.UserView
 
   test "renders user.json" do
-    user = %{id: 1, email: "user@example.com", name: "Alice", role: "participant"}
+    user = %{
+      id: 1,
+      email: "user@example.com",
+      name: "Alice",
+      role: "participant"
+    }
+
     expected = %{
       id: 1,
       email: "user@example.com",

@@ -41,3 +41,4 @@ defmodule Ch25BackendWeb.CheckInController do
     end
   end
 end
+  

@@ -1,13 +1,12 @@
 defmodule Ch25BackendWeb.UserView do
   use Ch25BackendWeb, :view
-  alias Ch25BackendWeb.UserView
 
   def render("index.json", %{users: users}) do
-    %{data: render_many(users, UserView, "user.json")}
+    %{data: render_many(users, Ch25BackendWeb.UserView, "user.json")}
   end
 
   def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
+    %{data: render_one(user, Ch25BackendWeb.UserView, "user.json")}
   end
 
   def render("user.json", %{user: user}) do

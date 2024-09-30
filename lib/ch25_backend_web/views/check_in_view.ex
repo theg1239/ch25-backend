@@ -1,13 +1,12 @@
 defmodule Ch25BackendWeb.CheckInView do
   use Ch25BackendWeb, :view
-  alias Ch25BackendWeb.CheckInView
 
   def render("index.json", %{check_ins: check_ins}) do
-    %{data: render_many(check_ins, CheckInView, "check_in.json")}
+    %{data: render_many(check_ins, Ch25BackendWeb.CheckInView, "check_in.json")}
   end
 
   def render("show.json", %{check_in: check_in}) do
-    %{data: render_one(check_in, CheckInView, "check_in.json")}
+    %{data: render_one(check_in, Ch25BackendWeb.CheckInView, "check_in.json")}
   end
 
   def render("check_in.json", %{check_in: check_in}) do

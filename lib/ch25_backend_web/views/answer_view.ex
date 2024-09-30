@@ -1,13 +1,12 @@
 defmodule Ch25BackendWeb.AnswerView do
   use Ch25BackendWeb, :view
-  alias Ch25BackendWeb.AnswerView
 
   def render("index.json", %{answers: answers}) do
-    %{data: render_many(answers, AnswerView, "answer.json")}
+    %{data: render_many(answers, Ch25BackendWeb.AnswerView, "answer.json")}
   end
 
   def render("show.json", %{answer: answer}) do
-    %{data: render_one(answer, AnswerView, "answer.json")}
+    %{data: render_one(answer, Ch25BackendWeb.AnswerView, "answer.json")}
   end
 
   def render("answer.json", %{answer: answer}) do

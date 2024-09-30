@@ -4,8 +4,8 @@ defmodule Ch25BackendWeb.UserSocket do
   ## Channels
   channel "leaderboard:lobby", Ch25BackendWeb.LeaderboardChannel
 
-  # Transport configuration
-  transport :websocket, Phoenix.Transports.WebSocket
+  # Define transports without using the deprecated transport macro
+  # Phoenix automatically handles transports, so no need to specify here
 
   # Connect function to authenticate the socket connection
   def connect(%{"token" => token}, socket, _connect_info) do

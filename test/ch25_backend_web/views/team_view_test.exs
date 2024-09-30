@@ -3,7 +3,13 @@ defmodule Ch25BackendWeb.TeamViewTest do
   alias Ch25BackendWeb.TeamView
 
   test "renders team.json" do
-    team = %{id: 1, name: "Team Alpha", join_code: "ABCDE", leader_id: 1}
+    team = %{
+      id: 1,
+      name: "Team Alpha",
+      join_code: "ABCDE",
+      leader_id: 1
+    }
+
     expected = %{
       id: 1,
       name: "Team Alpha",
