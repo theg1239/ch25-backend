@@ -1,0 +1,21 @@
+defmodule Ch25BackendWeb.TeamView do
+  use Ch25BackendWeb, :view
+  alias Ch25BackendWeb.TeamView
+
+  def render("index.json", %{teams: teams}) do
+    %{data: render_many(teams, TeamView, "team.json")}
+  end
+
+  def render("show.json", %{team: team}) do
+    %{data: render_one(team, TeamView, "team.json")}
+  end
+
+  def render("team.json", %{team: team}) do
+    %{
+      id: team.id,
+      name: team.name,
+      join_code: team.join_code,
+      leader_id: team.leader_id
+    }
+  end
+end
