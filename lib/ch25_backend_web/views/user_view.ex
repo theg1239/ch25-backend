@@ -1,20 +1,21 @@
-defmodule Ch25BackendWeb.UserView do
-  use Ch25BackendWeb, :view
+defmodule Ch25BackendWeb.UserJSON do
+  use Ch25BackendWeb, :json
 
-  def render("index.json", %{users: users}) do
-    %{data: render_many(users, Ch25BackendWeb.UserView, "user.json")}
+  def index(%{users: users}) do
+    %{data: for(user <- users, do: user_json(user))}
   end
 
-  def render("show.json", %{user: user}) do
-    %{data: render_one(user, Ch25BackendWeb.UserView, "user.json")}
+  def show(%{user: user}) do
+    %{data: user_json(user)}
   end
 
-  def render("user.json", %{user: user}) do
+  defp user_json(user) do
     %{
       id: user.id,
       email: user.email,
       name: user.name,
-      role: user.role
+      role: user.role,
+      team_id: user.team_id
     }
   end
 end

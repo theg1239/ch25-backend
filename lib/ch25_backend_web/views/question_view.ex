@@ -1,5 +1,5 @@
 defmodule Ch25BackendWeb.QuestionView do
-  use Ch25BackendWeb, :view
+  use Ch25BackendWeb, :json
 
   def render("index.json", %{questions: questions}) do
     %{data: render_many(questions, Ch25BackendWeb.QuestionView, "question.json")}

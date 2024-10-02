@@ -1,5 +1,5 @@
 defmodule Ch25BackendWeb.TeamView do
-  use Ch25BackendWeb, :view
+  use Ch25BackendWeb, :json
 
   def render("index.json", %{teams: teams}) do
     %{data: render_many(teams, Ch25BackendWeb.TeamView, "team.json")}
@@ -17,4 +17,5 @@ defmodule Ch25BackendWeb.TeamView do
       leader_id: team.leader_id
     }
   end
+
 end

@@ -1,5 +1,5 @@
 defmodule Ch25BackendWeb.ChangesetView do
-  use Ch25BackendWeb, :view
+  use Ch25BackendWeb, :json
 
   def render("error.json", %{changeset: changeset}) do
     %{errors: translate_errors(changeset)}

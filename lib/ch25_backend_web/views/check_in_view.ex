@@ -1,5 +1,5 @@
 defmodule Ch25BackendWeb.CheckInView do
-  use Ch25BackendWeb, :view
+  use Ch25BackendWeb, :json
 
   def render("index.json", %{check_ins: check_ins}) do
     %{data: render_many(check_ins, Ch25BackendWeb.CheckInView, "check_in.json")}

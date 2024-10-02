@@ -6,7 +6,6 @@ defmodule Ch25Backend.Questions do
   import Ecto.Query, warn: false
   alias Ch25Backend.Repo
   alias Ch25Backend.Questions.Question
-  alias Ch25Backend.Answers.Answer
   alias Ch25Backend.Accounts.User
 
   @doc """

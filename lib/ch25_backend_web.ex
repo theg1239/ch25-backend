@@ -1,25 +1,9 @@
 defmodule Ch25BackendWeb do
-  @moduledoc """
-  The entry point for defining your web interface, such
-  as controllers, views, channels, etc.
-
-  This can be used in your application as:
-
-      use Ch25BackendWeb, :controller
-      use Ch25BackendWeb, :view
-
-  The definitions below will be executed for every view,
-  controller, etc., so keep them short and clean, focused
-  on imports, uses, and aliases.
-
-  Do NOT define functions inside the quoted expressions
-  below. Instead, define any helper function in modules
-  and import those modules here.
-  """
-
   def controller do
     quote do
-      use Phoenix.Controller, namespace: Ch25BackendWeb
+      use Phoenix.Controller,
+        formats: [:html, :json],
+        namespace: Ch25BackendWeb
 
       import Plug.Conn
       import Ch25BackendWeb.Gettext
@@ -27,45 +11,53 @@ defmodule Ch25BackendWeb do
     end
   end
 
-  def view do
+  def html do
     quote do
-      use Phoenix.View,
-        root: "lib/ch25_backend_web/templates",
-        namespace: Ch25BackendWeb
+      use Phoenix.Component
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
+      # Use Phoenix.VerifiedRoutes for path helpers (~p sigil)
+      use Phoenix.VerifiedRoutes,
+        endpoint: Ch25BackendWeb.Endpoint,
+        router: Ch25BackendWeb.Router
 
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
+      # Include shared imports and aliases for HTML
+      unquote(html_helpers())
     end
   end
 
   def json do
     quote do
-      use Phoenix.View,
-        root: "lib/ch25_backend_web/templates",
-        namespace: Ch25BackendWeb
+      # For JSON rendering
+      import Phoenix.View, only: [render: 3, render_to_iodata: 3]
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller,
-        only: [get_flash: 1, get_flash: 2, view_module: 1, view_template: 1]
-
-      # Include shared imports and aliases for views
-      unquote(view_helpers())
+      # Include shared imports and aliases for JSON
+      unquote(json_helpers())
     end
   end
 
-  def html do
+  defp html_helpers do
     quote do
-      use Phoenix.Component
+      use Phoenix.HTML
 
       import Phoenix.LiveView.Helpers
+
+      import Phoenix.Component
+
+      import Phoenix.Controller, only: [get_csrf_token: 0]
+
+      import Ch25BackendWeb.ErrorHelpers
+      import Ch25BackendWeb.Gettext
+      alias Ch25BackendWeb.Router.Helpers, as: Routes
+    end
+  end
+
+
+  defp json_helpers do
+    quote do
       import Phoenix.View
 
-      # Include shared imports and aliases for components
-      unquote(view_helpers())
+      import Ch25BackendWeb.ErrorHelpers
+      import Ch25BackendWeb.Gettext
     end
   end
 
@@ -85,22 +77,8 @@ defmodule Ch25BackendWeb do
     end
   end
 
-  defp view_helpers do
-    quote do
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
-
-      # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
-
-      import Ch25BackendWeb.ErrorHelpers
-      import Ch25BackendWeb.Gettext
-      alias Ch25BackendWeb.Router.Helpers, as: Routes
-    end
-  end
-
   @doc """
-  When used, dispatch to the appropriate controller/view/etc.
+  When used, dispatch to the appropriate controller/component/etc.
   """
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])

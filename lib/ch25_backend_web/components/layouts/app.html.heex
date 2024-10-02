@@ -6,6 +6,6 @@
   <title>Ch25Backend</title>
 </head>
 <body>
-  <%= render @view_module, @view_template, assigns %>
+  <%= Phoenix.View.render(@view_module, @view_template, assigns) %>
 </body>
 </html>
