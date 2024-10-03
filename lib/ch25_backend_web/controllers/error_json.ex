@@ -8,4 +8,5 @@ defmodule Ch25BackendWeb.ErrorJSON do
   def render("500.json", _assigns) do
     %{errors: %{detail: "Internal Server Error"}}
   end
+
 end

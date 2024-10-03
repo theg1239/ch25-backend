@@ -1,26 +1,21 @@
 defmodule Ch25BackendWeb.UserJSON do
-  alias Ch25Backend.Accounts.User
+  use Ch25BackendWeb, :json
 
-  @doc """
-  Renders a list of users.
-  """
   def index(%{users: users}) do
-    %{data: for(user <- users, do: data(user))}
+    %{data: for(user <- users, do: user_json(user))}
   end
 
-  @doc """
-  Renders a single user.
-  """
   def show(%{user: user}) do
-    %{data: data(user)}
+    %{data: user_json(user)}
   end
 
-  defp data(%User{} = user) do
+  defp user_json(user) do
     %{
       id: user.id,
       email: user.email,
       name: user.name,
-      role: user.role
+      role: user.role,
+      team_id: user.team_id
     }
   end
 end

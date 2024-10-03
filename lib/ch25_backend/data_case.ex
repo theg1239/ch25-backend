@@ -1,8 +1,15 @@
 defmodule Ch25Backend.DataCase do
+  @moduledoc """
+  This module defines the setup for tests requiring
+  access to the application's data layer.
+  """
+
   use ExUnit.CaseTemplate
 
   using do
     quote do
+      alias Ch25Backend.Repo
+
       import Ecto
       import Ecto.Changeset
       import Ecto.Query

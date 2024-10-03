@@ -28,11 +28,30 @@ defmodule Ch25BackendWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import Ch25BackendWeb.ConnCase
+
+      alias Ch25BackendWeb.Router.Helpers, as: Routes
     end
   end
 
   setup tags do
-    Ch25Backend.DataCase.setup_sandbox(tags)
+    # Remove the undefined function call
+    # Ch25Backend.DataCase.setup_sandbox(tags)
+
+    # Instead, use DataCase's setup by ensuring it's invoked
+    # Since DataCase is defined as a CaseTemplate, and 'ConnCase' is another CaseTemplate,
+    # you need to include the setup from DataCase.
+
+    # One way is to use 'use Ch25Backend.DataCase' within 'ConnCase'
+
+    # However, since 'ConnCase' is already a CaseTemplate, you can import the setup logic
+    # Alternatively, manually perform the sandbox setup here as per 'DataCase'
+
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Ch25Backend.Repo)
+
+    unless tags[:async] do
+      Ecto.Adapters.SQL.Sandbox.mode(Ch25Backend.Repo, {:shared, self()})
+    end
+
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

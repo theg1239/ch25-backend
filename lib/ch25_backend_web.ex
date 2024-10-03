@@ -15,22 +15,18 @@ defmodule Ch25BackendWeb do
     quote do
       use Phoenix.Component
 
-      # Use Phoenix.VerifiedRoutes for path helpers (~p sigil)
       use Phoenix.VerifiedRoutes,
         endpoint: Ch25BackendWeb.Endpoint,
         router: Ch25BackendWeb.Router
 
-      # Include shared imports and aliases for HTML
       unquote(html_helpers())
     end
   end
 
   def json do
     quote do
-      # For JSON rendering
       import Phoenix.View, only: [render: 3, render_to_iodata: 3]
 
-      # Include shared imports and aliases for JSON
       unquote(json_helpers())
     end
   end
@@ -40,8 +36,9 @@ defmodule Ch25BackendWeb do
       use Phoenix.HTML
 
       import Phoenix.LiveView.Helpers
-
       import Phoenix.Component
+
+      import Ch25BackendWeb.CoreComponents
 
       import Phoenix.Controller, only: [get_csrf_token: 0]
 
